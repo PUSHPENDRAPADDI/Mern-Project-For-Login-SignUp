@@ -1,0 +1,15 @@
+### GET ALL PRODUCTS
+GET http://localhost:3001/api/products HTTP/1.1
+
+
+### ADD ITEM
+
+POST  http://localhost:3001/api/products HTTP/1.1
+Content-Type: : application/json
+
+{
+    "title": "Goggle",
+    "price": "RS 12453",
+    "image": "https://img.freepik.com/free-photo/portrait-joyful-young-man-white-shirt_171337-17467.jpg?size=626&ext=jpg&ga=GA1.2.637053373.1682752026&semt=ais",
+    "details": "JUST, Back"
+}
