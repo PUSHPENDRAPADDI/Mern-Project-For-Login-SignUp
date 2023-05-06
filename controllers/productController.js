@@ -1,5 +1,4 @@
 const Product = require("../model/Product");
-const UserDetails = require("../model/UserrDetails");
 
 // Get All products
 const product_all = async (req, res) => {

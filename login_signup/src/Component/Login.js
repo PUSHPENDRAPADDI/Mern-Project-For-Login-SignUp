@@ -10,8 +10,9 @@ const Login = (props) => {
     const userDetails = {
         email, password
     }
+    const navigate = useNavigate();
 
-    const sendOtp = async (e,userDetails) => {
+    const sendOtp = async (e, userDetails) => {
         e.preventDefault();
         if (email === "") {
             console.log(!email.includes("@"), "Not clicked");
@@ -44,8 +45,8 @@ const Login = (props) => {
                             <input type='password' name='password' id='password' placeholder='Enter Password'
                                 onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                        <button className='btn' onClick={(e) => sendOtp(e,userDetails)} >Login</button>
-                        <p>Don't have and account <NavLink to="/register">Sign up</NavLink> </p>
+                        <button className='btn' onClick={(e) => sendOtp(e, userDetails)} >Login</button>
+                        <p>Don't have and account <NavLink to="/createAccount">Sign up</NavLink> </p>
                     </form>
                 </div>
                 <ToastContainer />

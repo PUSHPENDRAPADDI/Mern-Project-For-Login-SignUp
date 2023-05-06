@@ -1,7 +1,9 @@
 import { Constant } from "../Constants";
 
 const initialState = {
-  count: 0
+  count: 0,
+  userData: {},
+  createdUser: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,7 +18,11 @@ const reducer = (state = initialState, action) => {
       };
     case Constant.LOGIN:
       return {
-
+        userData: action.payload
+      }
+    case Constant.CREATEACCOUNT:
+      return {
+        createdUser: action.payload
       }
     default:
       return state;

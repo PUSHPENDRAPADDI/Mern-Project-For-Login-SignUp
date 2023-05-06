@@ -1,19 +1,37 @@
 import './App.css';
-import NavBar from './Common/NavBar';
+import React, { useEffect, useState } from 'react';
+import NavBar from './Container/NavBarContainer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CounterContainer from './Container/CounterContainer';
 import LoginContainer from './Container/LoginContainer';
+import LoadingPage from './Component/LoadingPage';
+import LandingPage from './Component/Landing';
+import NoteCreation from './Component/NoteCreation';
+import CreateAccount from './Container/CreateAccount';
 
 function App() {
+
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timeout);
+  }, []);
   return (
-    <BrowserRouter>
-      <NavBar />
-      {/* <CounterContainer /> */}
-      <Routes>
-        <Route path="/login" element={<LoginContainer />} />
-        <Route path="*" element={<div>Wrong Path found</div>} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      {isLoading ? (
+        <LoadingPage />
+      ) : (
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginContainer />} />
+            <Route path="/createAccount" element={<CreateAccount />} />
+            <Route path="/createNote" element={<NoteCreation />} />
+            <Route path="*" element={<div>Wrong Path found</div>} />
+          </Routes>
+        </BrowserRouter>
+      )}
+    </div>
   );
 }
 

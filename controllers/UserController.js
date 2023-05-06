@@ -17,9 +17,7 @@ const user_create = async (req, res) => {
         if (!preUser) {
             const salt = await bcrypt.genSalt(10);
             const secPass = await bcrypt.hash(req.body.password, salt);
-            console.log("This is here");
             preUser = await UserDetails.create({
-                id: req.body.id,
                 name: req.body.name,
                 email: req.body.email,
                 password: secPass,
@@ -28,13 +26,13 @@ const user_create = async (req, res) => {
             })
             const data = {
                 preUser: {
-                    id: preUser.id
+                    _id: preUser._id
                 }
             }
             const authoken = jwt.sign(data, JWT_SECRET);
             res.status(200).json({ authoken, massage: "Account is Created Successfully" })
         } else {
-            return res.status(400).json({ error: "This Email is already exist" })
+            return res.status(200).json({ massege: "This Email is already exist" })
         }
     } catch (error) {
         console.error(error.message);
@@ -43,13 +41,6 @@ const user_create = async (req, res) => {
 }
 
 const user_forgot_pass = async (req, res) => {
-    // const userDetail = new UserDetails({
-    //     id: req.body.id,
-    //     name: req.body.name,
-    //     email: req.body.email,
-    //     password: req.body.password,
-    //     secretQuestion: req.body.secretQuestion,
-    // });
     try {
         const preUser = await UserDetails.findOne({ email: req.body.email })
         if (preUser) {
@@ -92,20 +83,25 @@ const user_login = async (req, res) => {
     const { email, password } = req.body;
     try {
         let user = await UserDetails.findOne({ email });
+        let userData = {
+            name: user.name,
+            email: user.email,
+            role: user.role
+        }
         if (!user) {
-            return res.status(400).json({ errors: "This email is not registred please register first" });
+            return res.status(401).json({ massege: "This email is not registred please register first" });
         }
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare) {
-            return res.status(400).json({ error: "Please enter corect password" });
+            return res.status(401).json({ error: "Please enter corect password" });
         }
         const data = {
             user: {
-                id: user.id
+                _id: user._id
             }
         }
         const authoken = jwt.sign(data, JWT_SECRET);
-        res.json({ authoken, massage: "Login successfully" })
+        res.status(200).json({ authoken, userData, massage: "Login Successfully" })
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal server Error")

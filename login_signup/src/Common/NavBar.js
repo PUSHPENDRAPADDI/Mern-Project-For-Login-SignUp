@@ -1,32 +1,50 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
+import "../Style/Style.css";
+import { NavLink, useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+function Navbar(props) {
+    const [userName, setUserName] = useState("");
+    const prevPropsRef = useRef();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (prevPropsRef.current && prevPropsRef.current.userData !== props.userData) {
+            setUserName(props.userData.name);
+            navigate("/createNote")
+        }
+        prevPropsRef.current = props;
+    });
+
     return (
-        <>
-            <nav className={`navbar navbar-expand-lg navbar-dark bg-dark`}>
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#">This is for user</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <a style={{ textDecoration: 'none', color: "dark" === 'dark' ? 'white' : '#042743' }} className="nav-a active" aria-current="page" href="#">Home</a>
-                            </li>
-                            {/* <li className="nav-item">
-                            <a className="nav-a" href="/about">About</a>
-                        </li> */}
-                        </ul>
-                        <div className={`form-check form-switch text-${'light' === 'light' ? 'dark' : 'light'}`}>
-                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{`Enable ${'light' === 'light' ? 'dark' : 'light'} mode `}</label>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </>
-    )
+        <nav className="navbar">
+            <div className="navbar__logo">MyNote</div>
+            <ul className="navbar__menu">
+                <li className="navbar__item">
+                    <NavLink to="/createAccount" className="navbar__link" >Home</NavLink>
+                </li>
+                <li className="navbar__item">
+                    <NavLink to="/createAccount" className="navbar__link" >About</NavLink>
+                </li>
+                <li className="navbar__item">
+                    <NavLink to="/createAccount" className="navbar__link" >Contact</NavLink>
+                </li>
+            </ul>
+            <div className="navbar__buttons">
+                {userName !== "" ?
+                    <p>{userName}</p> :
+                    <>
+                        <NavLink to="/login" className="navbar__login" >Login</NavLink>
+                        <NavLink to="/createAccount" className="navbar__signup" >SignUp</NavLink>
+                    </>}
+                {/* {Object.keys(props.userData).length > 0 ?
+                    <p>{userData.name}</p> :
+                    <>
+                        <NavLink to="/login" className="navbar__login" >Login</NavLink>
+                        <NavLink to="/createAccount" className="navbar__signup" >SignUp</NavLink>
+                    </>} */}
+            </div>
+        </nav>
+    );
 }
 
-export default NavBar
+export default Navbar;

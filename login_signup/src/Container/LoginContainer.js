@@ -4,18 +4,19 @@ import Login from '../Component/Login';
 
 const mapStateToProps = (state) => {
   return {
-    count: state.count
+    count: state.count,
+    userData: state.userData,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (userDetails) => {
-      return(
+      return (
         dispatch(Actions.login(userDetails))
       )
     },
-    decrement:() => dispatch (Actions.decrement())
+    decrement: () => dispatch(Actions.decrement())
   };
 };
 

@@ -1,4 +1,8 @@
-import reducer from "./Reducer";
-export const rootReducer = {
-    reducer: reducer,
-};
+import { combineReducers } from "redux";
+import reducer from "./Reducer/index";
+
+const rootReducer = combineReducers({
+    login: reducer
+});
+
+export default rootReducer;
