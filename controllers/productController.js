@@ -32,7 +32,7 @@ const product_create = async (req, res) => {
         email: req.body.email
     });
     try {
-        const savedProduct = await product.save();
+        const savedProduct = await Product.create(product)
         res.send(savedProduct);
     } catch (error) {
         res.status(400).send(error);

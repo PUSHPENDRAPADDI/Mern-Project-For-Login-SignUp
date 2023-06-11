@@ -3,4 +3,7 @@ export const Constant = {
     DECREMENT:"DECREMENT",
     LOGIN:"LOGIN",
     CREATEACCOUNT:"CREATEACCOUNT",
+    SUCCESS:'SUCCESS',
+    CREATENOTE:'CREATENOTE',
+    
 };

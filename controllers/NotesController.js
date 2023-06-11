@@ -1,3 +1,4 @@
+const { json } = require("express");
 const Notes = require("../model/Notes");
 const UserDetails = require("../model/UserrDetails");
 
@@ -25,7 +26,6 @@ const note_details = async (req, res) => {
 
 // Add New Notes
 const notes_create = async (req, res) => {
-    console.log(req);
     const notes = new Notes({
         id: req.body.id,
         title: req.body.title,
@@ -38,7 +38,7 @@ const notes_create = async (req, res) => {
         const checkUser = await UserDetails.findOne(query)
         if (checkUser) {
             const savedNote = await notes.save();
-            res.send(savedNote);
+            res.status(200).json({status: "SUCCESS", message: "Notes is created successfuly" });
         } else {
             res.send("User Not Found")
         }

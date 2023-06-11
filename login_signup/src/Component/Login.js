@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../Style/Style.css";
+import {Button} from "react-bootstrap";
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -15,7 +16,6 @@ const Login = (props) => {
     const sendOtp = async (e, userDetails) => {
         e.preventDefault();
         if (email === "") {
-            console.log(!email.includes("@"), "Not clicked");
             toast.error("Enter your email !")
         } else if (!email.includes("@")) {
             toast.error("Enter Valid email !")
@@ -54,4 +54,4 @@ const Login = (props) => {
         </>
     )
 }
-export default Login
+export default Login;

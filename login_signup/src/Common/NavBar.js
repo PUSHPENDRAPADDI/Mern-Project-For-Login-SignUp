@@ -7,13 +7,9 @@ function Navbar(props) {
     const prevPropsRef = useRef();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (prevPropsRef.current && prevPropsRef.current.userData !== props.userData) {
-            setUserName(props.userData.name);
-            navigate("/createNote")
-        }
-        prevPropsRef.current = props;
-    });
+    useEffect(() => {    
+        setUserName(props.userData.name)        
+      }, [props.userData]);
 
     return (
         <nav className="navbar">
@@ -36,12 +32,6 @@ function Navbar(props) {
                         <NavLink to="/login" className="navbar__login" >Login</NavLink>
                         <NavLink to="/createAccount" className="navbar__signup" >SignUp</NavLink>
                     </>}
-                {/* {Object.keys(props.userData).length > 0 ?
-                    <p>{userData.name}</p> :
-                    <>
-                        <NavLink to="/login" className="navbar__login" >Login</NavLink>
-                        <NavLink to="/createAccount" className="navbar__signup" >SignUp</NavLink>
-                    </>} */}
             </div>
         </nav>
     );

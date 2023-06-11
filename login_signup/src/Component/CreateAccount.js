@@ -29,7 +29,6 @@ const CreateAccount = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password, secretQuestion, role } = inputdata;
-
     if (name === "") {
       toast.error("Enter Your Name")
     } else if (email === "") {
@@ -49,7 +48,6 @@ const CreateAccount = (props) => {
     }
   }
   if (props.createdUser !== "") {
-    console.log("Sunny");
     navigate("/login")
   }
   

@@ -8,23 +8,20 @@ dotenv.config();
 
 // connect Db
 
-// mongoose.connect('mongodb://localhost:27017/', {
-//     dbName: 'Login_signUp',
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
+mongoose.connect('mongodb://127.0.0.1:27017/', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+},
+    console.log("Connected to DB")
+)
+// mongoose.connect(
+//     process.env.DB_CONNECT,
+//     {
+//         useUnifiedTopology: true,
+//         useNewUrlParser: true
 // },
 //     console.log("Connected to DB")
 // )
-mongoose.connect(
-    process.env.DB_CONNECT,
-    {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    },
-    console.log("Connected to db")
-)
-
-// Import routes
 
 const productRoutes = require("./routes/product");
 
