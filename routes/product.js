@@ -12,7 +12,7 @@ router.post("/user", userController.user_create);
 router.post("/user/login", userController.user_login);
 router.post("/user/forgetPass", userController.user_forgot_pass);
 router.post("/notes/createNote", notesController.notes_create);
-router.get("/notes/getNotes", notesController.notes_all);
+router.get("/notes/getNotes/:email", notesController.notes_all);
 router.get("/notes/getNoteDetail", notesController.note_details);
 router.put("/notes/updateNote", notesController.notes_update);
 router.delete("/notes/noteDelete", notesController.note_delete);

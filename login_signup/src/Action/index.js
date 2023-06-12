@@ -23,6 +23,7 @@ export const Actions = {
                             type: Constant.LOGIN,
                             payload: response.data.userData
                         })
+                        // dispatch(push('/'));
                     }
                 })
                 .catch(error => {

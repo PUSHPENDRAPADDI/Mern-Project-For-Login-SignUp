@@ -5,9 +5,9 @@ const UserDetails = require("../model/UserrDetails");
 // Get All Notes
 const notes_all = async (req, res) => {
     try {
-        const query = { email: req.body.email };
+        const query = { email: req.params.email };
         const notes = await Notes.find(query);
-        res.json(notes);
+        res.status(200).json({ status: "SUCCESS", notes });
     } catch (error) {
         res.json({ message: error });
     }
@@ -18,7 +18,7 @@ const note_details = async (req, res) => {
     try {
         const query = { _id: req.query.id };
         const note = await Notes.findOne(query);
-        res.json(note)
+        res.status(200).json({ status: "SUCCESS" }, note)
     } catch (error) {
         res.json({ message: error })
     }
@@ -38,7 +38,7 @@ const notes_create = async (req, res) => {
         const checkUser = await UserDetails.findOne(query)
         if (checkUser) {
             const savedNote = await notes.save();
-            res.status(200).json({status: "SUCCESS", message: "Notes is created successfuly" });
+            res.status(200).json({ status: "SUCCESS", message: "Notes is created successfuly" });
         } else {
             res.send("User Not Found")
         }

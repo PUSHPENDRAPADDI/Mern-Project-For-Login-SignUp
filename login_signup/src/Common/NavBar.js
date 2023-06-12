@@ -7,31 +7,30 @@ function Navbar(props) {
     const prevPropsRef = useRef();
     const navigate = useNavigate();
 
-    useEffect(() => {    
-        setUserName(props.userData.name)        
-      }, [props.userData]);
+    useEffect(() => {
+        console.log(props.userData.name, "THis is here");
+        setUserName(props.userData.name)
+    }, [props.userData]);
 
     return (
         <nav className="navbar">
-            <div className="navbar__logo">MyNote</div>
+            <div className="navbar__logo">Your-Note</div>
             <ul className="navbar__menu">
                 <li className="navbar__item">
-                    <NavLink to="/createAccount" className="navbar__link" >Home</NavLink>
+                    <NavLink to="/createNote" className="navbar__link" >Create Note's</NavLink>
                 </li>
                 <li className="navbar__item">
-                    <NavLink to="/createAccount" className="navbar__link" >About</NavLink>
-                </li>
-                <li className="navbar__item">
-                    <NavLink to="/createAccount" className="navbar__link" >Contact</NavLink>
+                    <NavLink to="/notes" className="navbar__link" >Your Note's</NavLink>
                 </li>
             </ul>
             <div className="navbar__buttons">
-                {userName !== "" ?
-                    <p>{userName}</p> :
-                    <>
-                        <NavLink to="/login" className="navbar__login" >Login</NavLink>
-                        <NavLink to="/createAccount" className="navbar__signup" >SignUp</NavLink>
-                    </>}
+                {/* {userName === "" ? */}
+                <>
+                    <NavLink to="/login" className="navbar__login" >Login</NavLink>
+                    <NavLink to="/createAccount" className="navbar__signup" >SignUp</NavLink>
+                </>
+                {/* : <p>{userName}</p>
+                } */}
             </div>
         </nav>
     );

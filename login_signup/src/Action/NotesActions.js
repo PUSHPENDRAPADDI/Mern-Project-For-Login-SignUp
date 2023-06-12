@@ -11,10 +11,29 @@ export const NotesActions = {
             };
             axios.post(urlConstants.CREATENOTES, updatedNotes)
                 .then(response => {
-                    console.log(response.data, "THis is here");
                     if (response.data.status === Constant.SUCCESS) {
                         dispatch({
                             type: Constant.CREATENOTE
+                        })
+                        dispatch(NotesActions.getNotes())
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    },
+    getNotes: () => {
+        return (dispatch, getState) => {
+            const email = getState().login.userData.email
+            axios.get(urlConstants.NOTES + "sunnyrony3011@gmail.com")
+                .then(response => {
+                    debugger
+                    if (response.data.status === Constant.SUCCESS) {
+                        console.log(response.data, "Thi saction");
+                        dispatch({
+                            type: Constant.GETNOTES,
+                            payload: response.data.notes
                         })
                     }
                 })

@@ -1,7 +1,8 @@
 import { Constant } from "../Constants";
 
 const initialState = {
-    note_create_status: ""
+    note_create_status: "",
+    note_list: [],
 };
 
 const NoteReducer = (state = initialState, action) => {
@@ -9,6 +10,10 @@ const NoteReducer = (state = initialState, action) => {
         case Constant.CREATENOTE:
             return {
                 note_create_status: "Note is create"
+            };
+        case Constant.GETNOTES:
+            return {
+                note_list: action.payload
             };
         default:
             return state;

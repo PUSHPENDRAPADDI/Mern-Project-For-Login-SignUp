@@ -8,7 +8,7 @@ dotenv.config();
 
 // connect Db
 
-mongoose.connect('mongodb://127.0.0.1:27017/', {
+mongoose.connect('mongodb://127.0.0.1:27017/ProductDB', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 },
