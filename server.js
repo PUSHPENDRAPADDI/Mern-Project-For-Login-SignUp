@@ -28,7 +28,7 @@ const productRoutes = require("./routes/product");
 // Middlewares
 app.use(express.json());
 app.use(cors());
-
+app.use('/uploads', express.static('uploads'))
 app.use("/api", productRoutes);
 
 app.listen(PORT, () => {

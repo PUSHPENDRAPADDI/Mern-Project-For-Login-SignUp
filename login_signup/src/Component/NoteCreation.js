@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Style/Style.css';
 
 function NoteCreation(props) {
@@ -8,6 +8,10 @@ function NoteCreation(props) {
   const [image, setImage] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+
+  useEffect(() => {
+    Object.keys(props.Edit_note).length > 0 && setTitle(props.Edit_note.title); setDescription(props.Edit_note.description);
+  }, [props.Edit_note])
 
   const handleAddNote = () => {
     if (title && description) {
@@ -27,6 +31,7 @@ function NoteCreation(props) {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    setImage(file)
     setSelectedFile(file);
     const reader = new FileReader();
     reader.onload = () => {

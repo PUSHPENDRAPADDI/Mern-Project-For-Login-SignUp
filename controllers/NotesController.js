@@ -30,14 +30,18 @@ const notes_create = async (req, res) => {
         id: req.body.id,
         title: req.body.title,
         description: req.body.description,
-        image: req.body.image,
-        email: req.body.email
+        image: req.file.path,
+        email: req.body.email,
     });
     try {
         const query = { email: req.body.email };
         const checkUser = await UserDetails.findOne(query)
+        const checkEdit = await Notes.findOne({ _id: req.body.idForfind })
         if (checkUser) {
-            const savedNote = await notes.save();
+            if (checkEdit) {
+                await Notes.deleteOne({ _id: req.body.idForfind })
+            }
+            await notes.save();
             res.status(200).json({ status: "SUCCESS", message: "Notes is created successfuly" });
         } else {
             res.send("User Not Found")

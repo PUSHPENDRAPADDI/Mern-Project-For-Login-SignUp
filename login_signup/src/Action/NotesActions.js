@@ -8,14 +8,21 @@ export const NotesActions = {
             const updatedNotes = {
                 ...newNotes,
                 email: getState().login.userData.email,
+                idForfind: getState().NoteReducer.Edit_note_id
             };
-            axios.post(urlConstants.CREATENOTES, updatedNotes)
+            const formData = new FormData();
+            formData.append('title', updatedNotes.title)
+            formData.append('description', updatedNotes.description)
+            formData.append('image', updatedNotes.image)
+            formData.append('email', updatedNotes.email)
+            formData.append('idForfind', updatedNotes.idForfind)
+            axios.post(urlConstants.CREATENOTES, formData)
                 .then(response => {
                     if (response.data.status === Constant.SUCCESS) {
                         dispatch({
                             type: Constant.CREATENOTE
                         })
-                        dispatch(NotesActions.getNotes())
+                        dispatch(NotesActions.getNotes());
                     }
                 })
                 .catch(error => {
@@ -26,11 +33,9 @@ export const NotesActions = {
     getNotes: () => {
         return (dispatch, getState) => {
             const email = getState().login.userData.email
-            axios.get(urlConstants.NOTES + "sunnyrony3011@gmail.com")
+            axios.get(urlConstants.NOTES + email)
                 .then(response => {
-                    debugger
                     if (response.data.status === Constant.SUCCESS) {
-                        console.log(response.data, "Thi saction");
                         dispatch({
                             type: Constant.GETNOTES,
                             payload: response.data.notes
@@ -42,4 +47,12 @@ export const NotesActions = {
                 });
         }
     },
+    forEdit: (item) => {
+        return (dispatch, getState) => {
+            dispatch({
+                type: Constant.EDITNOTES,
+                payload: item
+            })
+        }
+    }
 };

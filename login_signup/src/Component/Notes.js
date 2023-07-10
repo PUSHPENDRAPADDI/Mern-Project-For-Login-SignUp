@@ -2,21 +2,29 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Accordion from 'react-bootstrap/Accordion';
 import { NotesActions } from '../Action/NotesActions';
+import { NavLink, useNavigate } from "react-router-dom";
 
 export const Notes = (props) => {
   useEffect(() => {
     props.getNotes()
   }, [])
-  console.log(props.note_list, "Its for testing perpose");
+
+  const forEdit = (item) => {
+    props.forEdit(item)
+  }
+
   return (
-    <div style={{ width: "1000px", margin: "auto" }}>
-      <Accordion defaultActiveKey="0">
+    <div style={{ width: "90%", margin: "auto" }}>
+      <Accordion defaultActiveKey={['0']} alwaysOpen>
         {props.note_list.map((item, index) => {
           return (
             <Accordion.Item eventKey={index}>
-              <Accordion.Header>{item.title}</Accordion.Header>
+              <Accordion.Header>{item.title} 
+              <NavLink onClick={()=> forEdit(item)} style={{'right': '69px', 'position': 'absolute'}} to="/createNote" className="navbar__login" >Edit</NavLink>
+              </Accordion.Header>
               <Accordion.Body>
                 {item.description}
+                <img src={`http://localhost:3001/${item.image}`}/>
               </Accordion.Body>
             </Accordion.Item>
           )
@@ -29,7 +37,7 @@ export const Notes = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    note_list: state.NoteReducer.note_list
+    note_list: state.NoteReducer.note_list,
   };
 };
 
@@ -40,6 +48,11 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(NotesActions.getNotes())
       )
     },
+    forEdit:(item)=>{
+      return(
+        dispatch(NotesActions.forEdit(item))
+      )
+    }
   };
 };
 

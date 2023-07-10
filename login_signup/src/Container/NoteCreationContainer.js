@@ -5,6 +5,7 @@ import { NotesActions } from '../Action/NotesActions'
 const mapStateToProps = (state) => {
     return {
         userData: state.login.userData,
+        Edit_note: state.NoteReducer.Edit_note,
     };
 };
 
