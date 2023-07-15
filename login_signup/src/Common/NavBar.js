@@ -14,7 +14,7 @@ function Navbar(props) {
 
     return (
         <nav style={{padding:"5px 10px"}} className="navbar">
-            <div className="navbar__logo">Your-Note</div>
+            <div className="navbar__logo">My-Notes</div>
             <ul className="navbar__menu">
                 <li className="navbar__item">
                     <NavLink to={Object.keys(props.userData).length > 0 ? "/createNote" : "/login"} className="navbar__link" >Create Note's</NavLink>
@@ -25,7 +25,7 @@ function Navbar(props) {
             </ul>
             <div className="navbar__buttons">
                 {Object.keys(props.userData).length > 0 ?
-                    <p>{userName}</p>:
+                    <p>{userName.split(' ')[0]}</p>:
                     <>
                         <NavLink to="/login" className="navbar__login" >Login</NavLink>
                     </>

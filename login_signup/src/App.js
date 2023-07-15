@@ -13,14 +13,16 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const timeout = setTimeout(() => setIsLoading(false), 2000);
+    const timeout = setTimeout(() => setIsLoading(false), 4000);
     return () => clearTimeout(timeout);
   }, []);
   return (
     <div>
+      <LoadingPage />
       {isLoading ? (
         <LoadingPage />
-      ) : (
+      ) 
+      : (
         <BrowserRouter>
           <NavBar />
           <Routes>
@@ -32,7 +34,8 @@ function App() {
             <Route path="*" element={<div>Wrong Path found</div>} />
           </Routes>
         </BrowserRouter>
-      )}
+      )
+      }
     </div>
   );
 }

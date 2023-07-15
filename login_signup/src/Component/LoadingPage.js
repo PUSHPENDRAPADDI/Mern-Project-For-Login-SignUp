@@ -1,16 +1,17 @@
 import React from 'react';
 import '../Style/Style.css';
+import Typical from 'react-typical'
 
 function LoadingPage() {
     return (
-        <div className="book-animation dark-mode">
+        <div className="book-animation">
             <div className="book">
-                <div className="book-cover">
-                    <div className="book-title">Studying with a book</div>
-                </div>
-                <div className="book-pages">
-                    <div className="page page-1"></div>
-                    <div className="page page-2"></div>
+                <div className="page page-1">
+                    <Typical
+                        steps={[2000, "Let's store your Notes Here", 1000]}
+                        loop={1}
+                        wrapper="h1"
+                    />
                 </div>
             </div>
         </div>
