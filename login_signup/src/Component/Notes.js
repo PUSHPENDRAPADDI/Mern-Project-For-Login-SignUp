@@ -24,7 +24,9 @@ export const Notes = (props) => {
               </Accordion.Header>
               <Accordion.Body>
                 {item.description}
-                <img src={`http://localhost:3001/${item.image}`}/>
+              </Accordion.Body>
+              <Accordion.Body>
+                <img style={{width: "200px"}} src={`http://localhost:3001/${item.image}`}/>
               </Accordion.Body>
             </Accordion.Item>
           )

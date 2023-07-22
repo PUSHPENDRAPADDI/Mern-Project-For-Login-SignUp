@@ -10,6 +10,7 @@ function NoteCreation(props) {
   const [previewImage, setPreviewImage] = useState(null);
 
   useEffect(() => {
+    console.log(title, "its here");
     Object.keys(props.Edit_note).length > 0 && setTitle(props.Edit_note.title); setDescription(props.Edit_note.description);
   }, [props.Edit_note])
 
@@ -82,7 +83,7 @@ function NoteCreation(props) {
         <div key={index} className="note">
           <h2>{note.title}</h2>
           <p>{note.description}</p>
-          {note.image && <img src={note.image} alt={note.title} />}
+          {note.image && <img style={{width: "200px"}} src={note.image} alt={note.title} />}
         </div>
       ))}
     </div>

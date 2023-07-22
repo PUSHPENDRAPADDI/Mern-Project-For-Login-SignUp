@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 function LandingPage() {
     const [textArray, setTextArray] = useState([
         "Organize your thoughts with our intuitive notes website",
@@ -27,6 +28,7 @@ function LandingPage() {
 
     return (
         <div className='landing-page'>
+            
             <div className="header">
                 <h1>Welcome to Your Website</h1>
             </div>

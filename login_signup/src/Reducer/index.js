@@ -4,6 +4,7 @@ const initialState = {
   count: 0,
   userData: {},
   createdUser: "",
+  userName:"",
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,7 +19,8 @@ const reducer = (state = initialState, action) => {
       };
     case Constant.LOGIN:
       return {
-        userData: action.payload
+        userData: action.payload,
+        userName: action.payload.name.split(' ').filter(word => word !== '').map(word => word[0]).join('')
       }
     case Constant.CREATEACCOUNT:
       return {
