@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
 function LandingPage() {
     const [textArray, setTextArray] = useState([
         "Organize your thoughts with our intuitive notes website",

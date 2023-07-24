@@ -54,5 +54,13 @@ export const NotesActions = {
                 payload: item
             })
         }
+    },
+    resetEditData: () => {
+        return (dispatch, getState) => {
+            dispatch
+                ({
+                    type: Constant.RESET_EDITDATA
+                })
+        }
     }
 };

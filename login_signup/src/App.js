@@ -8,6 +8,7 @@ import LandingPage from './Component/Landing';
 import CreateAccount from './Container/CreateAccount';
 import NoteCreationContainer from './Container/NoteCreationContainer';
 import Notes from './Component/Notes';
+// import Dictaphone from './Component/Dictaphone';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/login" element={<LoginContainer />} />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path="/createNote" element={<NoteCreationContainer />} />
+            {/* <Route path="/dictaphone" element={<Dictaphone />} /> */}
             <Route path='/notes' element={<Notes />} />
             <Route path="*" element={<div>Wrong Path found</div>} />
           </Routes>

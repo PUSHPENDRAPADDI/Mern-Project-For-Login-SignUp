@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import '../Style/Style.css';
+import microphone from '../Assests/microphone.png';
+import write from '../Assests/pencil.png';
 
 function NoteCreation(props) {
   const [notes, setNotes] = useState([]);
@@ -8,11 +11,32 @@ function NoteCreation(props) {
   const [image, setImage] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [speechFlag, setSpeechFlag] = useState(false);
+  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+
+  const startLitening = () => {
+    SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
+  }
 
   useEffect(() => {
-    console.log(title, "its here");
-    Object.keys(props.Edit_note).length > 0 && setTitle(props.Edit_note.title); setDescription(props.Edit_note.description);
-  }, [props.Edit_note])
+    if (Object.keys(props.Edit_note).length > 0) {
+      setTitle(props.Edit_note.title);
+      setDescription(props.Edit_note.description);
+      setPreviewImage(props.Edit_note.image);
+    }
+
+    if (speechFlag) {
+      setDescription(...description, transcript)
+      startLitening()
+    } else {
+      SpeechRecognition.stopListening()
+    }
+    
+    return () => {
+      props.resetEditData()
+      setSpeechFlag(false)
+    };
+  }, [props.Edit_note,speechFlag, transcript])
 
   const handleAddNote = () => {
     if (title && description) {
@@ -40,7 +64,7 @@ function NoteCreation(props) {
     };
     reader.readAsDataURL(file);
   };
-  
+
   return (
     <div className="note-taking-app">
       <h1>Note Taking App</h1>
@@ -75,17 +99,25 @@ function NoteCreation(props) {
           <img src={previewImage} alt="Preview" style={{ maxWidth: '100%' }} />
         )}
       </div>
+      <p>Transcript : {transcript}</p>
       <button className="btn btn-primary" onClick={handleAddNote}>
         Add Note
       </button>
-      <hr />
-      {notes.map((note, index) => (
+      <img
+        style={{ margin: "5px" }}
+        src={speechFlag ? write : microphone}
+        alt='microphone'
+        onClick={() => setSpeechFlag(!speechFlag)}
+      />
+
+      {/* <hr /> */}
+      {/* {notes.map((note, index) => (
         <div key={index} className="note">
           <h2>{note.title}</h2>
           <p>{note.description}</p>
           {note.image && <img style={{width: "200px"}} src={note.image} alt={note.title} />}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }

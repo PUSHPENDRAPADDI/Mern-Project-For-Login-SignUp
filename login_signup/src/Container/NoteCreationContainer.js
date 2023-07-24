@@ -16,6 +16,11 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(NotesActions.createNotes(newNotes))
             )
         },
+        resetEditData: () => {
+            return (
+                dispatch(NotesActions.resetEditData())
+            )
+        }
     };
 };
 

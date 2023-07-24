@@ -47,7 +47,7 @@ const Login = (props) => {
                             <img src={imgpng1} alt="this is img" width="40px" />
                         </div>
                         <div className="effect effect-6">
-                            <img src={imgpng} alt="this is img" width="40px" />
+                            <img src={imgpng5} alt="this is img" width="40px" />
                         </div>
                         <div className="effect effect-7">
                             <img src={imgpng1} alt="this is img" width="40px" />

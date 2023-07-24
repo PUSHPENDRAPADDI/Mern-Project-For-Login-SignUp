@@ -3,8 +3,8 @@ import { Constant } from "../Constants";
 const initialState = {
     note_create_status: "",
     note_list: [],
-    Edit_note:{},
-    Edit_note_id:'',
+    Edit_note: {},
+    Edit_note_id: '',
 };
 
 const NoteReducer = (state = initialState, action) => {
@@ -20,10 +20,15 @@ const NoteReducer = (state = initialState, action) => {
                 note_list: action.payload
             };
         case Constant.EDITNOTES:
-            return{
+            return {
                 ...state,
                 Edit_note: action.payload,
                 Edit_note_id: action.payload._id
+            }
+        case Constant.RESET_EDITDATA:
+            return {
+                ...state,
+                Edit_note: {}
             }
         default:
             return state;
