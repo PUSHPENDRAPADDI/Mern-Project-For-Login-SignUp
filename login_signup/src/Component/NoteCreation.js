@@ -22,7 +22,7 @@ function NoteCreation(props) {
     if (Object.keys(props.Edit_note).length > 0) {
       setTitle(props.Edit_note.title);
       setDescription(props.Edit_note.description);
-      setPreviewImage(props.Edit_note.image);
+      setPreviewImage(`http://localhost:3001/${props.Edit_note.image}`);
     }
 
     if (speechFlag) {
@@ -31,12 +31,12 @@ function NoteCreation(props) {
     } else {
       SpeechRecognition.stopListening()
     }
-    
+
     return () => {
       props.resetEditData()
       setSpeechFlag(false)
     };
-  }, [props.Edit_note,speechFlag, transcript])
+  }, [props.Edit_note, speechFlag, transcript])
 
   const handleAddNote = () => {
     if (title && description) {
@@ -66,58 +66,60 @@ function NoteCreation(props) {
   };
 
   return (
-    <div className="note-taking-app">
-      <h1>Note Taking App</h1>
-      <div className="form-group">
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          className="form-control"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
+    <div className='bg-note'>
+      <div className="note-taking-app">
+        <h1>Note Taking App</h1>
+        <div className="form-group">
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            className="form-control"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            className="form-control"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          />
+        </div>
+        <div className="form-group" style={{ border: "1px solid #efefef", borderRadius: "10px", padding: "5px" }}>
+          <label htmlFor="image">Select Image : </label>
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+          {previewImage && (
+            <img style={{ maxWidth: "200px", borderRadius: "10px" }} src={previewImage} alt="Preview" />
+          )}
+        </div>
+        <p>Transcript : {transcript}</p>
+        <button className="btn btn-primary" onClick={handleAddNote}>
+          Add Note
+        </button>
+        <img
+          style={{ margin: "5px" }}
+          src={speechFlag ? write : microphone}
+          alt='microphone'
+          onClick={() => setSpeechFlag(!speechFlag)}
         />
-      </div>
-      <div className="form-group">
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
-          className="form-control"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="image">Select Image:</label>
-        <input
-          type="file"
-          id="image"
-          accept="image/*"
-          onChange={handleFileChange}
-        />
-        {previewImage && (
-          <img src={previewImage} alt="Preview" style={{ maxWidth: '100%' }} />
-        )}
-      </div>
-      <p>Transcript : {transcript}</p>
-      <button className="btn btn-primary" onClick={handleAddNote}>
-        Add Note
-      </button>
-      <img
-        style={{ margin: "5px" }}
-        src={speechFlag ? write : microphone}
-        alt='microphone'
-        onClick={() => setSpeechFlag(!speechFlag)}
-      />
 
-      {/* <hr /> */}
-      {/* {notes.map((note, index) => (
+        {/* <hr /> */}
+        {/* {notes.map((note, index) => (
         <div key={index} className="note">
           <h2>{note.title}</h2>
           <p>{note.description}</p>
           {note.image && <img style={{width: "200px"}} src={note.image} alt={note.title} />}
         </div>
       ))} */}
+      </div>
     </div>
   );
 }

@@ -16,13 +16,13 @@ function Navbar(props) {
     return (
         <nav style={{ padding: "5px 10px" }} className="navbar">
             <div className="navbar__logo">
-                <img style={{borderRadius:"10px"}} width="40px" src={logo} alt="logo" /></div>
+                <img style={{ borderRadius: "10px" }} width="40px" src={logo} alt="logo" /></div>
             <ul className="navbar__menu">
                 <li className="navbar__item">
-                    <NavLink to={Object.keys(props.userData).length > 0 ? "/createNote" : "/login"} className="navbar__link" >Create Note's</NavLink>
+                    <NavLink to={Object.keys(props.userData).length > 0 ? "/createNote" : "/login"} className="navbar__link">Create Note's</NavLink>
                 </li>
                 <li className="navbar__item">
-                    <NavLink to={Object.keys(props.userData).length > 0 ? "/notes" : "/login"} className="navbar__link" >Your Note's</NavLink>
+                    <NavLink to={Object.keys(props.userData).length > 0 ? "/notes" : "/login"} className="navbar__link" >{props.userName.length > 0 && "Your Note's"}</NavLink>
                 </li>
             </ul>
             <div className="navbar__buttons">

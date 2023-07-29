@@ -57,10 +57,11 @@ export const NotesActions = {
     },
     resetEditData: () => {
         return (dispatch, getState) => {
-            dispatch
-                ({
+            dispatch(
+                {
                     type: Constant.RESET_EDITDATA
-                })
+                }
+            )
         }
     }
 };

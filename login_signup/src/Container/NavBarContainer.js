@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Navbar from '../Common/NavBar';
+import { NotesActions } from '../Action/NotesActions';
 
 const mapStateToProps = (state) => {
     return {
@@ -10,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        
     };
 };
 
